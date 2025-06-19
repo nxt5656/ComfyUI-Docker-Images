@@ -163,8 +163,8 @@ RUN --mount=type=cache,target=/home/root/.cache/pip \
 
 RUN --mount=type=cache,target=/home/root/.cache/pip \
     pip install \
-        -r https://gh-proxy.com/https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt \
-        -r https://gh-proxy.com/https://github.com/ltdrdata/ComfyUI-Manager/raw/refs/heads/main/requirements.txt \
+        -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt \
+        -r https://github.com/ltdrdata/ComfyUI-Manager/raw/refs/heads/main/requirements.txt \
     && pip list
 
 
