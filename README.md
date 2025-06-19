@@ -17,6 +17,6 @@ comfyui镜像
 
 |   依赖   |      版本      |    说明    |
 |:------:|:------------:|:--------:|
-|   os   | ubuntu:24.04 |          |
+|   OS   | openSUSE Tumbleweed |          |
 |  CUDA  |     12.4     |          |
-| python |     3.12     | |
+| Python |     3.12     | |
