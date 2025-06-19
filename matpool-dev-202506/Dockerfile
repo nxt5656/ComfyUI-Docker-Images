@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.description="ComfyUI容器镜像"
 LABEL org.opencontainers.image.source=https://github.com/nxt5656/ComfyUIDockerImages
 ENV DEBIAN_FRONTEND=noninteractive
-
+WORKDIR /workspace
 RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
         curl \
@@ -15,15 +15,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         wget \
         git \
-        && rm -rf /var/lib/apt/lists/*
+        && rm -rf /var/lib/apt/lists/* \
+
 FROM os-base AS cuda-base
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin && \
-    mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600 && \
-    wget https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-ubuntu2404-12-8-local_12.8.0-1_amd64.deb && \
-    dpkg -i cuda-repo-ubuntu2404-12-8-local_12.8.0-1_amd64.deb && \
-    cp /var/cuda-repo-ubuntu2404-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/ && \
-    apt-get update && apt-get install -y --no-install-recommends cuda && \
-    rm -rf /var/lib/apt/lists/* cuda-repo-ubuntu2404-12-8-local_12.8.0-1_amd64.deb
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
+RUN mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
+RUN wget https://developer.download.nvidia.com/compute/cuda/12.8.1/local_installers/cuda-repo-ubuntu2404-12-8-local_12.8.1-570.124.06-1_amd64.deb
+RUN dpkg -i cuda-repo-ubuntu2404-12-8-local_12.8.1-570.124.06-1_amd64.deb
+RUN cp /var/cuda-repo-ubuntu2404-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+RUN apt update && apt install -y --no-install-recommends cuda-toolkit-12-8
 
 FROM cuda-base AS python-base
 RUN add-apt-repository ppa:deadsnakes/ppa && \
