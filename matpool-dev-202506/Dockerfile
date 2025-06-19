@@ -33,5 +33,5 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1 && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1 && \
-    python --version && pip3 install --no-cache-dir --upgrade pip setuptools
+    python --version && pip3 install --break-system-packages --no-cache-dir --upgrade pip setuptools
 
