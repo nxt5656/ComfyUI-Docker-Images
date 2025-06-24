@@ -16,8 +16,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu128
 RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install \
-        -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt \
-    gitpython nvitop
+    -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt \
+    -r https://gh-proxy.com/https://github.com/ltdrdata/ComfyUI-Manager/raw/refs/heads/main/requirements.txt \
+    gitpython nvitop && \
+    pip list
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
