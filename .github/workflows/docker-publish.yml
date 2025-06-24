@@ -24,5 +24,7 @@ jobs:
       - name: 构建并推送镜像
         run: |
           IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/comfyui-images
+          docker build -t $IMAGE_NAME:matpool-dev-20250624  -f matpool-dev-20250624/Dockerfile  ./matpool-dev-20250624
+          docker push $IMAGE_NAME:matpool-dev-20250624
           docker build -t $IMAGE_NAME:matpool-dev-202506  -f matpool-dev-202506/Dockerfile  ./matpool-dev-202506
           docker push $IMAGE_NAME:matpool-dev-202506
