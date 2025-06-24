@@ -16,10 +16,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu128
 RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install \
-        -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt
-RUN --mount=type=cache,target=/root/.cache/pip \
-        /opt/venv/bin/pip install gitpython nvitop
-
+        -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt \
+    gitpython nvitop
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
@@ -33,7 +31,7 @@ RUN apt update && \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-RUN mkdir /var/run/sshd && \
+RUN mkdir -p /var/run/sshd && \
     ssh-keygen -A && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
