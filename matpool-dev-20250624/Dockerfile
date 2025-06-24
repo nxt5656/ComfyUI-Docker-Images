@@ -9,9 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt update && \
-    apt install -y python3.12 python3-pip python3-venv && \
-    rm -f /var/cache/apt/archives/lock
-
+    apt install -y python3.12 python3-pip python3-venv
 RUN python3 -m venv /opt/venv
 RUN /opt/venv/bin/pip install --upgrade pip
 RUN --mount=type=cache,target=/home/root/.cache/pip \
@@ -21,9 +19,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt
 
 FROM ubuntu:latest AS comfyui_runner
-RUN --mount=type=cache,target=/var/cache/apt \
-    apt update && \
-    apt install -y git
+RUN apt update && \
+    apt install -y git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 COPY --from=base_os /opt/venv /opt/venv
 COPY runner-scripts/.  /runner-scripts/
 USER root
