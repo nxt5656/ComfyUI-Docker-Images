@@ -26,7 +26,7 @@ echo "########################################"
 # 使得 .pyc 缓存文件集中保存
 export PYTHONPYCACHEPREFIX="/root/.cache/pycache"
 # 使得 PIP 安装新包到 /root/.local
-export PIP_USER=true
+export PIP_USER=false
 # 添加上述路径到 PATH
 export PATH="${PATH}:/root/.local/bin"
 # 不再显示警报 [WARNING: Running pip as the 'root' user]
