@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt install -y python3.12 python3-pip python3-venv
 RUN python3 -m venv /opt/venv
 RUN /opt/venv/bin/pip install --upgrade pip
-RUN --mount=type=cache,target=/home/root/.cache/pip \
+RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu128
 RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install \
@@ -26,8 +26,8 @@ RUN apt update && \
 COPY --from=base_os /opt/venv /opt/venv
 COPY runner-scripts/.  /runner-scripts/
 USER root
-VOLUME /home/root
-WORKDIR /home/root
+VOLUME /root
+WORKDIR /root
 EXPOSE 8188
 
 ENV CLI_ARGS=""
