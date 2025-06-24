@@ -9,7 +9,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt update && \
-    apt install -y python3.12 python3-pip python3-venv
+    apt install -y python3.12 python3-pip python3-venv && \
+    rm -f /var/cache/apt/archives/lock
 
 RUN python3 -m venv /opt/venv
 RUN /opt/venv/bin/pip install --upgrade pip
