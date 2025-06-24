@@ -20,7 +20,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 FROM ubuntu:latest AS comfyui_runner
 RUN apt update && \
-    apt install -y git && \
+    apt install -y git python3.12 python3-pip python3-venv && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 COPY --from=base_os /opt/venv /opt/venv
