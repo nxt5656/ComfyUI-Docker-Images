@@ -18,9 +18,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install \
         -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip \
-        /opt/venv/bin/pip install gitpython nvitop \
+        /opt/venv/bin/pip install gitpython nvitop
 
-FROM ubuntu:latest AS comfyui_runner
+FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     apt install -y  \
