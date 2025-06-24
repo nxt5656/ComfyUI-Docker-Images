@@ -16,7 +16,7 @@ RUN /opt/venv/bin/pip install --upgrade pip
 RUN --mount=type=cache,target=/home/root/.cache/pip \
     /opt/venv/bin/pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu128
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install \
+    /opt/venv/bin/pip install \
         -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt
 
 FROM ubuntu:latest AS comfyui_runner
