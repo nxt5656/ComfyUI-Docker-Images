@@ -46,4 +46,3 @@ WORKDIR /root
 
 ENV CLI_ARGS=""
 CMD ["supervisord","-c","/root/supervisord.conf"]
-CMD ["bash","/runner-scripts/entrypoint.sh"]
