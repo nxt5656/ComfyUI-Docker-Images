@@ -30,7 +30,7 @@ RUN apt update && \
     supervisor \
     && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN mkdir -p /var/run/sshd && \
     ssh-keygen -A && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
