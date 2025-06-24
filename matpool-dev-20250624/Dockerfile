@@ -18,7 +18,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     /opt/venv/bin/pip install \
     -r https://github.com/comfyanonymous/ComfyUI/raw/refs/heads/master/requirements.txt \
     -r https://gh-proxy.com/https://github.com/ltdrdata/ComfyUI-Manager/raw/refs/heads/main/requirements.txt \
-    gitpython nvitop && \
+    nvitop && \
     pip list
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
@@ -45,6 +45,8 @@ ADD --chmod=775 supervisord.conf /root/
 USER root
 VOLUME /root
 WORKDIR /root
+ENV PATH="/opt/venv/bin:${PATH}"
+
 
 ENV CLI_ARGS=""
 CMD ["supervisord","-c","/root/supervisord.conf"]
