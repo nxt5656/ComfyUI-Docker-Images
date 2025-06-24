@@ -111,20 +111,18 @@ RUN --mount=type=cache,target=/home/root/.cache/pip \
         --upgrade pip wheel setuptools \
     && pip install \
         --dry-run xformers torchvision torchaudio \
-        --index-url https://download.pytorch.org/whl/cu128 \
-        --extra-index-url https://mirrors.cernet.edu.cn/pypi/web/simple
-
+        --index-url https://download.pytorch.org/whl/cu128
 RUN --mount=type=cache,target=/home/root/.cache/pip \
     pip install \
         --no-deps xformers torch torchvision torchaudio \
-        --index-url https://download.pytorch.org/whl/cu128 \
-        --extra-index-url https://mirrors.cernet.edu.cn/pypi/web/simple
+        --index-url https://download.pytorch.org/whl/cu128
+
 
 RUN --mount=type=cache,target=/home/root/.cache/pip \
     pip install \
         xformers torchvision torchaudio \
-        --index-url https://download.pytorch.org/whl/cu128 \
-        --extra-index-url https://mirrors.cernet.edu.cn/pypi/web/simple
+        --index-url https://download.pytorch.org/whl/cu128
+
 
 # 绑定环境变量 (依赖库 .so 文件)
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}\
