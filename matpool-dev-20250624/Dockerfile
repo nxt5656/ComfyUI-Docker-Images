@@ -21,6 +21,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         /opt/venv/bin/pip install gitpython nvitop \
 
 FROM ubuntu:latest AS comfyui_runner
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     apt install -y  \
     git  \
@@ -37,6 +38,7 @@ RUN mkdir /var/run/sshd && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
     echo "root:passwd123" | chpasswd
+
 COPY --from=base_os /opt/venv /opt/venv
 COPY runner-scripts/.  /runner-scripts/
 ADD --chmod=775 supervisord.conf /root/
