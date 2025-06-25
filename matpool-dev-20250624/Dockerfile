@@ -20,8 +20,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     -r https://gh-proxy.com/https://github.com/ltdrdata/ComfyUI-Manager/raw/refs/heads/main/requirements.txt \
     nvitop && \
     pip list
+
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/opt/venv/bin:${PATH}"
+LABEL maintainer="nxt5656 <nxt5656@live.cn>"
 RUN apt update && \
     apt install -y  \
     git  \
@@ -41,12 +44,11 @@ RUN mkdir -p /var/run/sshd && \
 
 COPY --from=base_os /opt/venv /opt/venv
 COPY runner-scripts/.  /runner-scripts/
-ADD --chmod=775 supervisord.conf /root/
 USER root
 VOLUME /root
 WORKDIR /root
-ENV PATH="/opt/venv/bin:${PATH}"
+
 
 
 ENV CLI_ARGS=""
-CMD ["supervisord","-c","/root/supervisord.conf"]
+CMD ["supervisord","-c","/runner-scripts/supervisord.conf"]
