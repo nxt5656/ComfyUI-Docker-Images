@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH="/opt/venv/bin:${PATH}"
+
 LABEL maintainer="nxt5656 <nxt5656@live.cn>"
 RUN apt update && \
     apt install -y  \
@@ -41,7 +41,7 @@ RUN mkdir -p /var/run/sshd && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
     echo "root:passwd123" | chpasswd
-
+RUN echo "PATH=/opt/venv/bin:${PATH}" >> /etc/profile
 COPY --from=base_os /opt/venv /opt/venv
 COPY runner-scripts/.  /runner-scripts/
 USER root
