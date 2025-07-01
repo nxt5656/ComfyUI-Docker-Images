@@ -20,9 +20,12 @@ jobs:
 
       - name: 登陆GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
+      - name: 登陆阿里云镜像仓库
+        run: echo "${{ secrets.ALIYUN_CR_PASSWD }}" | docker login registry.cn-hangzhou.aliyuncs.com -u ${{ secrets.ALIYUN_CR_USER }} --password-stdin
       - name: 构建并推送镜像
         run: |
           IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/comfyui-images
           docker build -t $IMAGE_NAME:matpool-a100-40g-dev  -f matpool-a100-40g/Dockerfile  ./matpool-a100-40g
           docker push $IMAGE_NAME:matpool-a100-40g-dev
+          docker tag $IMAGE_NAME:matpool-a100-40g-dev ${{ secrets.ALIYUN_CR_URI }}:a100-40g-dev
+          docker push ${{ secrets.ALIYUN_CR_URI }}:a100-40g-dev
