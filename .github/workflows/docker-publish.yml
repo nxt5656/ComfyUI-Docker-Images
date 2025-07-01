@@ -26,6 +26,6 @@ jobs:
         run: |
           IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/comfyui-images
           docker build -t $IMAGE_NAME:matpool-a100-40g-dev  -f matpool-a100-40g/Dockerfile  ./matpool-a100-40g
-          docker push $IMAGE_NAME:matpool-a100-40g-dev
-          docker tag $IMAGE_NAME:matpool-a100-40g-dev ${{ secrets.ALIYUN_CR_URI }}:a100-40g-dev
+           docker tag $IMAGE_NAME:matpool-a100-40g-dev ${{ secrets.ALIYUN_CR_URI }}:a100-40g-dev
           docker push ${{ secrets.ALIYUN_CR_URI }}:a100-40g-dev
+          docker push $IMAGE_NAME:matpool-a100-40g-dev
