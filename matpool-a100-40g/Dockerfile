@@ -33,7 +33,7 @@ RUN apt update && \
     openssh-server \
     passwd \
     supervisor \
-    nginx \
+#    nginx \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -45,7 +45,7 @@ RUN mkdir -p /var/run/sshd && \
 RUN echo "PATH=/opt/venv/bin:${PATH}" >> /etc/profile
 COPY --from=base_os /opt/venv /opt/venv
 COPY runner-scripts/.  /runner-scripts/
-COPY nginx.default /etc/nginx/sites-available/default
+#COPY nginx.default /etc/nginx/sites-available/default
 USER root
 VOLUME /root
 WORKDIR /root
