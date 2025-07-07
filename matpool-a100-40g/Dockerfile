@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
-
+ENV HF_ENDPOINT=https://hf-mirror.com
 LABEL maintainer="nxt5656 <nxt5656@live.cn>"
 RUN apt update && \
     apt install -y  \
@@ -33,6 +33,11 @@ RUN apt update && \
     openssh-server \
     passwd \
     supervisor \
+    curl \
+    wget \
+    screen \
+    rsync \
+    libgl1 \
 #    nginx \
     && \
     apt-get clean && \
